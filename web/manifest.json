@@ -1,6 +1,6 @@
 {
-    "name": "stockbay_app",
-    "short_name": "stockbay_app",
+    "name": "application_prof",
+    "short_name": "application_prof",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
