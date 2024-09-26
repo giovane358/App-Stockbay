@@ -1,4 +1,4 @@
-import 'package:application_prof/app/core/feature/login/screen/login.page.dart';
+import 'package:application_prof/check.dart';
 
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: const CheckLogin(),
     );
   }
 }

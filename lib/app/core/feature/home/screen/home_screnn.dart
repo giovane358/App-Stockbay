@@ -1,4 +1,8 @@
+import 'package:application_prof/app/core/feature/login/controller/login_controller.dart';
+import 'package:application_prof/app/data/enum.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controller/home_controller.dart';
 
@@ -11,42 +15,52 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late Future<List<Product>> futureProducts;
+  String _token = "";
 
   @override
   void initState() {
     super.initState();
-    futureProducts = fetchUserProducts();
+    loadToken();
+  }
+  //função para verificar se o usuario esta logado
+
+  Future<void> loadToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _token = prefs.getString('token') ?? 'Nenhum token encontrado';
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<Product>>(
-        future: futureProducts,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Erro: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('Nenhum produto encontrado.'));
-          }
-
-          List<Product> products = snapshot.data!;
-
-          return ListView.builder(
-            itemCount: products.length,
-            itemBuilder: (context, index) {
-              final product = products[index];
-              return ListTile(
-                title: Text(product.name),
-                subtitle: Text(
-                    '${product.name}\nPreço: R\$${product.priceInCents.toStringAsFixed(2)}'),
-                isThreeLine: true,
-              );
+      body: Text('$_token'),
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_close,
+        backgroundColor: Colors.blue,
+        overlayColor: Colors.black,
+        overlayOpacity: 0.5,
+        children: [
+          SpeedDialChild(
+            child: const Icon(Icons.exit_to_app),
+            label: 'Sair do Aplicativo',
+            onTap: () {
+              logout(context);
             },
-          );
-        },
+          ),
+          SpeedDialChild(
+            child: const Icon(Icons.add),
+            label: 'Adicionar',
+          ),
+          SpeedDialChild(
+            child: const Icon(Icons.contact_phone),
+            label: 'Fornecedores',
+          ),
+          SpeedDialChild(
+            child: const Icon(Icons.settings),
+            label: 'Configuração',
+          ),
+        ],
       ),
     );
   }

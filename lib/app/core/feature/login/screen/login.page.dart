@@ -13,14 +13,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
-  bool _resul = true;
-
+  // verificação de click para exibir a senha na tela
   void _visibility() {
     setState(() {
-      if (_resul == true) {
-        _resul = false;
+      if (resul == true) {
+        resul = false;
       } else {
-        _resul = true;
+        resul = true;
       }
     });
   }
@@ -56,7 +55,7 @@ class _LoginPage extends State<LoginPage> {
               ContainerEdit(
                 child: TextFormField(
                   controller: controllerPassword,
-                  obscureText: _resul,
+                  obscureText: resul,
                   decoration: InputDecoration(
                     hintText: '***************',
                     hintStyle: const TextStyle(color: Colors.grey),
@@ -76,37 +75,26 @@ class _LoginPage extends State<LoginPage> {
                   },
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
-                width: size.width * 0.7,
-                height: size.height * 0.03,
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(23)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        if (fromKey.currentState!.validate()) {
-                          login();
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomeScreen(),
-                            ),
-                          );
-                        }
-                      },
-                      child: const Text(
-                        'Login',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
-                    ),
-                  ],
+              GestureDetector(
+                onTap: () {
+                  if (fromKey.currentState!.validate()) {
+                    login(context);
+                  }
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
+                  width: size.width * 0.7,
+                  height: size.height * 0.03,
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(23)),
+                  child: const Text(
+                    'Login',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 15),
+                  ),
                 ),
               ),
               Container(
