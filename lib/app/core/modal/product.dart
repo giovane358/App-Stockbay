@@ -1,11 +1,9 @@
-import 'dart:ffi';
-
 class Product {
   final String id;
   final String name;
   final String dtCompra;
-  final double priceInCents;
-  final Bool active;
+  final int priceInCents;
+  final bool active;
 
   Product(
       {required this.id,
@@ -19,7 +17,7 @@ class Product {
       id: json['id'],
       name: json['name'],
       dtCompra: json['dtCompra'],
-      priceInCents: json['priceInCents'],
+      priceInCents: json['price_in_cents'],
       active: json['active'],
     );
   }

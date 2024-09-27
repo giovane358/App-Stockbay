@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:application_prof/app/data/api/config.dart';
@@ -12,7 +14,7 @@ String? token;
 
 Future<void> register() async {
   final response = await http.post(
-    Uri.parse('$baseUrl/register'),
+    Uri.parse('$baseUrl/auth/register'),
     headers: {'Content-Type': 'application/json'},
     body: jsonEncode({
       'login': controllerLogin.text,

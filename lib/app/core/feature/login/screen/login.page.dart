@@ -1,4 +1,3 @@
-import 'package:application_prof/app/core/feature/home/screen/home_screnn.dart';
 import 'package:application_prof/app/core/feature/login/controller/login_controller.dart';
 import 'package:application_prof/app/core/feature/register/screen/register_screen.dart';
 

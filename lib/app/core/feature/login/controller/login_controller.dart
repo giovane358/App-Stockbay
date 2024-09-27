@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, avoid_print
 
 import 'dart:convert';
 
@@ -27,7 +27,7 @@ bool isLoading = false;
 //função de login
 Future<void> login(BuildContext context) async {
   final response = await http.post(
-    Uri.parse('$baseUrl/login'),
+    Uri.parse('$baseUrl/auth/login'),
     headers: {'Content-Type': 'application/json'},
     body: jsonEncode({
       'login': controllerLogin.text,
