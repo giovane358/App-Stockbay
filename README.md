@@ -1,4 +1,4 @@
-# stockbay_app
+# stockbay
 
 A new Flutter project.
 
